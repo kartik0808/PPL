@@ -36,7 +36,7 @@ router.post("/uploadimage",upload.single('uploadedFile'),async function(req,res)
   res.end(uploadImage);
 })
 
-router.post("/getpost",async function(req,res){ //ko
+router.post("/getpost",async function(req,res){
   const checkEmail = await imageapi.fetchUser(req.body.email);
   res.json(checkEmail);
 })
