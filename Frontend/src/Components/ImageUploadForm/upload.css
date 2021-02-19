@@ -1,0 +1,40 @@
+
+#uploadImage{
+  border:3px solid #ffa31e;
+  padding:3% 5%;
+  padding-bottom: 2%;
+  display:flex;
+  flex-direction: column;
+}
+
+.label1{
+  padding-top:6%;
+  font-weight: bolder;
+}
+
+.category{
+  display:flex;
+  flex-direction: column;
+  margin:3% 0;
+  width:75%;
+}
+
+.category label{
+  margin-right:3%;
+}
+
+.category input{
+  margin-right:1%;
+}
+
+#submit-image{
+  width:50%;
+  height:30px;
+  margin:auto;
+  margin-bottom: 5%;
+  font-weight: bolder;
+}
+
+.animals{
+  display:flex;
+}
