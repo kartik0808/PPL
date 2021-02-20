@@ -4,6 +4,7 @@ import axios from 'axios';
 import history from '../../History/history'
 import './login.css'
 import {Link} from 'react-router-dom'
+import config from '../../Config/config'
 
 function Login(){
 
@@ -27,7 +28,7 @@ function Login(){
     }
 
     axios
-      .post("http://localhost:8887/home/checkuser",user)
+      .post(`${config.backendUrl}checkuser`,user)
       .then(res=>{
         console.log(res.data);
         setLoginError(res.data);

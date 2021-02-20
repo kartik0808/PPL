@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './upload.css'
+import config from '../../Config/config'
 
 export default function UploadImage(props){
   
@@ -19,11 +20,11 @@ export default function UploadImage(props){
     formData.append('filename',event.target[7].files[0].name);
     formData.append('category',category);
     formData.append('date',new Date());
+    formData.append('likes',0);
 
     axios
-      .post("http://localhost:8887/home/uploadimage",formData)
+      .post(`${config.backendUrl}uploadimage`,formData)
       .then(res=>{
-        //console.log(res);
         setImageStatus(res.data);
         props.toggleValue();
       })

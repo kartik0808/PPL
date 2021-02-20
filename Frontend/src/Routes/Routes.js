@@ -5,13 +5,15 @@ import history from '../History/history'
 import Timeline from '../Components/Timeline'
 import LoginSignup from '../Components/WelcomeFromPPL';
 import Image from '../Components/ImageUploadForm'
+import ImageViewer from '../Components/ImageViewer'
 
 export default function Routes(){
   return(
     <div>
       <Router history={history}>
         <Switch>
-          <Route path="/timeline" component={Timeline}/>
+          <Route exact path="/timeline" component={Timeline}/>
+          <Route path="/timeline/:number" component={ImageViewer}/>
           <Route path="/image" component={Image}/>
           <Route path="/profile" component={Profile}/>
           <Route path="/" component={LoginSignup}/>

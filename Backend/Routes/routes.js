@@ -12,32 +12,30 @@ var upload = multer( { storage: storage } );
 const fs = require('fs');
 
 router.get('/',(req,res)=>{
-  res.end("This is the Home Page");
+  res.send("This is the Home Page");
   console.log('get call');
 })
 
 // adding data to the database
 router.post("/receivedata",async function(req,res) {
   const newUserDataCheck = await userapi.addUser(req.body);
-  console.log(newUserDataCheck);
-  res.end(newUserDataCheck);
+  res.send(newUserDataCheck);
 });
 
 // checking and  logging in user
 router.post("/checkuser",async function(req,res){
   const checkUserExists = await userapi.checkUser(req.body);
-  console.log(checkUserExists);
-  res.end(checkUserExists);
+  res.send(checkUserExists);
 })
 
 //uploading the image
 router.post("/uploadimage",upload.single('uploadedFile'),async function(req,res){
   const uploadImage = await imageapi.uploadImage(req.body);
-  res.end(uploadImage);
+  res.send(uploadImage);
 })
 
 router.post("/getpost",async function(req,res){
-  const checkEmail = await imageapi.fetchUser(req.body.email);
+  const checkEmail = await imageapi.fetchUser();
   res.json(checkEmail);
 })
 
@@ -45,4 +43,27 @@ router.post("/userdata",async function(req,res){
   const userData = await userapi.getUserName(req.body.email);
   res.json(userData);
 })
+
+router.post('/imageinfo',async function(req,res){
+  const imageData = await imageapi.getImageInfo(req.body);
+  res.json(imageData);
+})
+
+router.post('/likes',async function(req,res){
+  console.log(req.body);
+  const likesData = await imageapi.updateLikes(req.body);
+  res.json(likesData);
+})
+
+router.post("/dislikes", async function (req, res) {
+  console.log(req.body);
+  const likesData = await imageapi.updateDislikes(req.body);
+  res.json(likesData);
+})
+
+router.post('/comment',async function(req,res){
+  const commentData = await imageapi.addComment(req.body);
+  res.json(commentData);
+})
+
 module.exports = router;

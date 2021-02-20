@@ -1,11 +1,16 @@
 import React from 'react';
+import axios from 'axios';
+import config from '../../Config/config'
 
 function Header(){
   const [user,setUser] = React.useState('');
     
-  React.useEffect(()=>{
-    setUser(localStorage.getItem('email'));
-  })
+  React.useEffect(() => {
+    const id = localStorage.getItem("email");
+    axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
+      setUser(res.data.username);
+    });
+  }, []);
     
   return(
     <div>
@@ -15,7 +20,7 @@ function Header(){
             <button type="button" className="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span className="icon-bar" /> <span className="icon-bar" /> <span className="icon-bar" /> </button>
             <a className="brand" href>PPL</a>
             <div className="pro_info pull-right">
-              <div className="pro_icn"><img src="./images/pic_small.png" /></div>
+              <div className="pro_icn"><img src="/./images/pic_small.png" /></div>
               <div className="pro_txt">Me<b className="caret" /></div>
               <ul className="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a tabIndex={-1} href="#">My Profile</a></li>
@@ -41,7 +46,7 @@ function Header(){
       </div>
       <div className="header">
         <div className="header_lft">
-          <div className="logo"><a href="#"><img src="./images/logo.png" /></a></div>
+          <div className="logo"><a href="#"><img src="/./images/logo.png" /></a></div>
           <div className="navigatn">
             <ul>
               <li><a href="#" className="active">Home</a></li>
@@ -53,11 +58,11 @@ function Header(){
           </div>
         </div>
         <div className="header_rgt">
-          <div className="flag_div"><img src="./images/flag.png" /></div>
+          <div className="flag_div"><img src="/./images/flag.png" /></div>
           <input type="text" placeholder="Search" className="txt_box" />
           <div className="msg_box"><a href="#"><span className="msg_count">100</span></a></div>
           <div className="info_div">
-            <div className="image_div"> <img src="./images/pic.png" /> </div>
+            <div className="image_div"> <img src="/./images/pic.png" /> </div>
             <div className="info_div1">{user}</div>
           </div>
         </div>

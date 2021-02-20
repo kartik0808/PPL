@@ -7,6 +7,9 @@ let imageData = new mongoose.Schema({
   filename: String,
   category: String,
   date: String,
+  likes: Number,
+  likedby: Array,
+  comments: Array,
   uploadedImage: String
 })
 
