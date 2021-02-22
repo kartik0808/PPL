@@ -46,11 +46,7 @@ export default function ForgotPassword() {
             <input
               type="text"
               onChange={(event) => setVerificationCode(event.target.value)}
-            />
-            <br />
-            {showErrorMessage ? (
-              <span className="red">Please enter a the correct Verification Code!</span>
-            ) : null}
+            /><br/>
             <input
               type="submit"
               defaultValue="Ok"
@@ -58,12 +54,18 @@ export default function ForgotPassword() {
               onClick={() => {
                 if (parseInt(verificationCode) === receivedVerificationCode) {
                   setOpenModal(false);
-                  history.push("/timeline");
+                  history.push({
+                    pathname: "/reset",
+                    data: email,
+                  });
                 } else {
                   setShowErrorMessage(true);
                 }
               }}
             />
+            {showErrorMessage ? (
+              <p className="red">Please enter the correct Verification Code!</p>
+            ) : null}
           </div>
         </div>
       </Modal>

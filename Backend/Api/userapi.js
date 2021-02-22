@@ -30,5 +30,9 @@ module.exports ={
 
   getUserName:async function(data){
     return userInfo.findOne({'email':data}).then(res=>{return res;})
+  },
+
+  updatePassword:async function(data){
+    return userInfo.updateOne({'email':data.email},{$set:{password:data.password}});
   }
 }

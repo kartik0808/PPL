@@ -77,4 +77,9 @@ router.post('/forgot',async function(req,res){
   }
 })
 
+router.post('/updatepassword',async function(req,res){
+  const updateData = await userapi.updatePassword(req.body); 
+  res.json(updateData);
+})
+
 module.exports = router;

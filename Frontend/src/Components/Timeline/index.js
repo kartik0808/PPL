@@ -20,12 +20,12 @@ function Timeline() {
     });
   }, [value]);
 
-  useEffect(() => {
-    const id = localStorage.getItem("email");
-    axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
-      setUserName(res.data.fname + " " + res.data.lname);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const id = localStorage.getItem("email");
+  //   axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
+  //     setUserName(res.data.fname + " " + res.data.lname);
+  //   });
+  // }, []);
 
   function toggleValue() {
     if (value === false) {

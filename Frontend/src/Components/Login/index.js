@@ -19,8 +19,8 @@ function Login(){
       password:password
     }
 
-    function redirector(){
-      localStorage.setItem('email',user.email);
+    async function redirector(){
+      await localStorage.setItem('email',user.email);
       history.push({
         pathname:'/timeline',
         data:user
