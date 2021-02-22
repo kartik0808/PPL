@@ -3,8 +3,8 @@ import { Link, Switch, Route, Router } from "react-router-dom";
 import UploadImage from "../ImageUploadForm";
 import axios from "axios";
 import time from "../../TimeFunctions";
-import ImageViewer from "../ImageViewer";
 import config from "../../Config/config";
+import ImageViewer from '../ImageViewer'
 
 function Timeline() {
   const [uploadImage, setUploadImage] = useState(false);
@@ -286,15 +286,15 @@ function Timeline() {
                                     </a>
                                   </li>
                                   <li>
-                                    <a href="#">
+                                    <Link>
                                       <span className="btn_icon">
                                         <img
                                           src="images/icon_003.png"
                                           alt="share"
                                         />
                                       </span>
-                                      0 Likes
-                                    </a>
+                                      {image.likes} Likes
+                                    </Link>
                                   </li>
                                   <li>
                                     <a href="#">
@@ -304,7 +304,7 @@ function Timeline() {
                                           alt="share"
                                         />
                                       </span>
-                                      4 Comments
+                                      {image.comments.length} Comments
                                     </a>
                                   </li>
                                 </ul>

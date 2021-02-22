@@ -57,7 +57,7 @@ function Login(){
               ):(
               <h4 className="red">{loginError}</h4>
             )}
-            <li><input id="submit" type="submit" defaultValue="Log In" /><a href>Forgot Password</a></li>
+            <li><input id="submit" type="submit" defaultValue="Log In" /><Link to="/forgot">Forgot Password</Link></li>
           </form>
           <div className="addtnal_acnt">I do not have any account yet.<Link to="/">Create My Account Now !</Link></div>
         </div>

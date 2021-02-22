@@ -2,6 +2,8 @@ var router = require('express').Router();
 const userapi = require('../Api/userapi');
 const imageapi = require('../Api/imageapi');
 const multer = require('multer');
+const nodemailer = require('../NodeMailer/nodemailer');
+
 var storage = multer.diskStorage({
   destination: './imgs',
   filename: function ( req, file, cb ) {
@@ -64,6 +66,15 @@ router.post("/dislikes", async function (req, res) {
 router.post('/comment',async function(req,res){
   const commentData = await imageapi.addComment(req.body);
   res.json(commentData);
+})
+
+router.post('/forgot',async function(req,res){
+  if(await userapi.getUserName(req.body.email) !== null){
+    const forgotPassword = await nodemailer.main(req.body.email);
+    res.json(forgotPassword);
+  } else{
+    res.json('email doesnot exist');
+  }
 })
 
 module.exports = router;

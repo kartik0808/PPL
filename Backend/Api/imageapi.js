@@ -48,9 +48,7 @@ module.exports = {
         {
           $push: {
             comments: [
-              { value: data.comment ,
-               by: data.email ,
-               time: data.date },
+              { value: data.comment, by: data.email, time: data.date },
             ],
           },
         }

@@ -29,6 +29,6 @@ module.exports ={
   },
 
   getUserName:async function(data){
-    return userInfo.findOne({'email':data}).then(res=>{return res})
+    return userInfo.findOne({'email':data}).then(res=>{return res;})
   }
 }

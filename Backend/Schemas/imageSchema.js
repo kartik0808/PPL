@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 let imageData = new mongoose.Schema({
   email: String,
@@ -7,12 +7,12 @@ let imageData = new mongoose.Schema({
   filename: String,
   category: String,
   date: String,
-  likes: Number,
+  likes: { type: Number, default: 0 },
   likedby: Array,
   comments: Array,
-  uploadedImage: String
-})
+  uploadedImage: String,
+});
 
-let imageInfo = mongoose.model("pplimageinfo",imageData);
+let imageInfo = mongoose.model("pplimageinfo", imageData);
 
-module.exports  = imageInfo;
+module.exports = imageInfo;

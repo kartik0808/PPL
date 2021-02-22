@@ -3,16 +3,18 @@ import {Router ,Route, Switch} from 'react-router-dom';
 import Register from '../Components/Register'
 import history from '../History/history'
 import Login from '../Components/Login' 
+import ForgotPassword from '../Components/ForgotPassword/forgotpassword'
 
 export default function LoginSignupRoutes(){
-  return(
+  return (
     <div>
       <Router history={history}>
         <Switch>
-          <Route path="/login" component={Login}/>
-          <Route path="/" component={Register}/>
+          <Route path="/forgot" component={ForgotPassword} />
+          <Route path="/login" component={Login} />
+          <Route path="/" component={Register} />
         </Switch>
-      </Router> 
+      </Router>
     </div>
   );
 }

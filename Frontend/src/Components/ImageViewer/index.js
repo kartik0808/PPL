@@ -235,7 +235,7 @@ export default function ImageViewer(props) {
                           <span className="btn_icon">
                             <img src="/images/icon_004.png" alt="share" />
                           </span>
-                          4 Comments
+                          {addComment.length} Comments
                         </Link>
                       </li>
                       <span>
@@ -250,25 +250,6 @@ export default function ImageViewer(props) {
             </div>
             <div className="contnt_3">
               <ul>
-                {addComment.map((value, index) => {
-                  console.log(value);
-                  return (
-                    <li key={index}>
-                      <div className="list_image">
-                        <div className="image_sec">
-                          <img src="/images/post_img.png" />
-                        </div>
-                        <div className="image_name">{value.by}</div>
-                      </div>
-                      <div className="list_info">{value.value}</div>
-                      <input
-                        type="button"
-                        defaultValue="Reply"
-                        className="orng_btn"
-                      />
-                    </li>
-                  );
-                })}
                 <li>
                   <div className="cmnt_div1">
                     <input
@@ -288,6 +269,27 @@ export default function ImageViewer(props) {
                     />
                   </div>
                 </li>
+                {addComment
+                  .map((value, index) => {
+                    console.log(value);
+                    return (
+                      <li key={index}>
+                        <div className="list_image">
+                          <div className="image_sec">
+                            <img src="/images/post_img.png" />
+                          </div>
+                          <div className="image_name">{value.by}</div>
+                        </div>
+                        <div className="list_info">{value.value}</div>
+                        <input
+                          type="button"
+                          defaultValue="Reply"
+                          className="orng_btn"
+                        />
+                      </li>
+                    );
+                  })
+                  .reverse()}
               </ul>
               <div className="view_div">
                 <a href="#">View more</a>
@@ -300,3 +302,5 @@ export default function ImageViewer(props) {
     </div>
   );
 }
+
+
