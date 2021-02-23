@@ -7,6 +7,10 @@ import time from "../../TimeFunctions";
 export default function ImageViewer(props) {
   const data = props.match.params.number;
 
+  useEffect(()=>{
+    window.scrollTo(0,0);
+  },[])
+
   const [imageInfo, setImageInfo] = useState("");
   const [userName, setUserName] = useState("");
   const [updater, setUpdater] = useState(true);

@@ -47,11 +47,7 @@ function Timeline() {
                 <span className="btn_sep">
                   <img src="images/btn_sep.png" alt="sep" />
                 </span>{" "}
-                <Link
-                  onClick={() =>
-                    setUploadImage(!uploadImage)
-                  }
-                >
+                <Link onClick={() => setUploadImage(!uploadImage)}>
                   Upload Post
                 </Link>{" "}
               </div>
@@ -181,7 +177,7 @@ function Timeline() {
                         <ul>
                           <li>
                             <div className="div_name1">Name :</div>
-                            <div className="div_name2">{userName}</div>
+                            <div className="div_name2">Stefany Gibbs</div>
                           </li>
                           <li>
                             <div className="div_name1">Sex :</div>
@@ -249,9 +245,7 @@ function Timeline() {
                               </div>
                             </div>
                             <div className="div_image">
-                              <Link
-                                to={`/timeline/${image._id}`}
-                              >
+                              <Link to={`/timeline/${image._id}`}>
                                 <img
                                   id="image-upload"
                                   src={config.backendImageUrl + image.filename}

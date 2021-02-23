@@ -9,6 +9,7 @@ export default function UploadImage(props){
   const [description,setDescription] = React.useState('');
   const [category,setCategory] = React.useState('');
   const [imageStatus,setImageStatus] = React.useState('');
+  const [uploadedFile,setUploadedFile] = React.useState('')
 
   function handleSubmit(event){
 
@@ -20,6 +21,7 @@ export default function UploadImage(props){
     formData.append('filename',event.target[7].files[0].name);
     formData.append('category',category);
     formData.append('date',new Date());
+    formData.append('uploadedFile',event.target[7].files[0]);
     formData.append('likes',0);
 
     axios
@@ -62,7 +64,7 @@ export default function UploadImage(props){
             <label for="other">Other</label>
           </div>
         </div>
-        <input type='file' name='uploadedFile' required />
+        <input type='file' name='uploadedFile' onChange={event=>setUploadedFile(event.target.files[0])} required />
         {imageStatus==="Image Uploaded"?(
           <h4 className="green">{imageStatus}</h4>
           ):(
