@@ -1,23 +1,28 @@
 const imageInfo = require("../Schemas/imageSchema");
 
 module.exports = {
+
+  // function to upload the information of the image to the database
   uploadImage: async function (data) {
     imageInfo.create(data);
     return "Image Uploaded";
   },
 
-  fetchUser: async function (data) {
+  // function to get all images
+  fetchAllImages: async function (data) {
     return imageInfo.find({}).then((res) => {
       return res;
     });
   },
 
+  //function to find the required image
   getImageInfo: async function (data) {
     return imageInfo.findOne({ _id: data }).then((res) => {
       return res;
     });
   },
 
+  // function to add likes to the image
   updateLikes: async function (data) {
     return imageInfo
       .updateOne(
@@ -29,6 +34,7 @@ module.exports = {
       });
   },
 
+  // function to remove likes from the image
   updateDislikes: async function (data) {
     return imageInfo
       .updateOne(
@@ -40,6 +46,7 @@ module.exports = {
       });
   },
 
+  // function to add comments to the image
   addComment: async function (data) {
     console.log(data.comment);
     return await imageInfo

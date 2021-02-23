@@ -1,6 +1,8 @@
 const userInfo = require('../Schemas/userSchema');
 
 module.exports ={
+
+  // function to check if user exists
   addUser:async function(data){
     const checkEmail = await userInfo.findOne({'email': data.email})
     const checkUsername = await userInfo.findOne({'username': data.username})
@@ -14,6 +16,7 @@ module.exports ={
     }
   },
 
+  // function to check the login credentials
   checkUser:async function(data){
     const checkUserCredentials = await userInfo.findOne({"email":data.email,"password":data.password});
     if(checkUserCredentials){
@@ -28,10 +31,12 @@ module.exports ={
     }
   },
 
+  // function to get the user information
   getUserName:async function(data){
     return userInfo.findOne({'email':data}).then(res=>{return res;})
   },
 
+  // function to change the password of the user
   updatePassword:async function(data){
     return userInfo.updateOne({'email':data.email},{$set:{password:data.password}});
   }

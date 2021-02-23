@@ -4,7 +4,6 @@ import UploadImage from "../ImageUploadForm";
 import axios from "axios";
 import time from "../../TimeFunctions";
 import config from "../../Config/config";
-import ImageViewer from '../ImageViewer'
 
 function Timeline() {
   const [uploadImage, setUploadImage] = useState(false);

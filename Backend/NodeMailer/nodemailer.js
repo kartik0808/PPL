@@ -2,6 +2,8 @@ const nodemailer = require("nodemailer");
 const config = require("../Config/config");
 
 module.exports = {
+
+  // function to send mail to user for verification
   main: async function (email) {
     console.log("Nodemailer is running");
     let transporter = nodemailer.createTransport({
