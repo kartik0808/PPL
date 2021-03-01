@@ -1,6 +1,6 @@
 
 
 module.exports = {
-  backendUrl:'http://localhost:8887/home/',
-  backendImageUrl:'http://localhost:8887/'
-}
+  backendUrl: "http://192.168.100.242:8887/home/",
+  backendImageUrl: "http://192.168.100.242:8887/",
+};
