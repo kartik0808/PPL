@@ -3,35 +3,32 @@ import { useEffect, useState } from "react";
 import config from "../../Config/config";
 import { Link } from "react-router-dom";
 import time from "../../TimeFunctions";
-import action from '../../Action/action';
+import action from "../../Action/action";
+import { connect } from "react-redux";
 
-export default function ImageViewer(props) {
+function ImageViewer(props) {
   const data = props.match.params.number;
-
-  useEffect(()=>{
-    window.scrollTo(0,0);
-  },[])
+  console.log(props);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [imageInfo, setImageInfo] = useState("");
   const [userName, setUserName] = useState("");
-  const [updater, setUpdater] = useState(true);
+  //const [updater, setUpdater] = useState(true);
   const [message, setMessage] = useState("");
   const [comment, setComment] = useState("");
-  const [addComment, setAddComment] = useState([])
+  const [addComment, setAddComment] = useState([]);
   const [value, setValue] = useState(false);
 
   useEffect(() => {
-    axios
-      .post(`${config.backendUrl}imageinfo`, { _id: data })
-      .then((res) => {
-        setImageInfo(res.data);
-        setMessage(
-          res.data.likedby.includes(localStorage.getItem("email"))
-        );
-        setAddComment(res.data.comments);
-        console.log('hello');
-      })
-  }, [updater,value]);
+    axios.post(`${config.backendUrl}imageinfo`, { _id: data }).then((res) => {
+      setImageInfo(res.data);
+      setMessage(res.data.likedby.includes(localStorage.getItem("email")));
+      setAddComment(res.data.comments);
+      console.log("hello");
+    });
+  }, [props.updater, value]);
 
   useEffect(() => {
     const id = localStorage.getItem("email");
@@ -46,12 +43,12 @@ export default function ImageViewer(props) {
       axios
         .post(`${config.backendUrl}likes`, event)
         .then((res) => console.log(res.data))
-        .then(() => setUpdater(!updater));
+        .then(props.dispatch(action.updateValue(false)));
     } else {
       axios
         .post(`${config.backendUrl}dislikes`, event)
         .then((res) => console.log(res.data))
-        .then(() => setUpdater(!updater));
+        .then(props.dispatch(action.updateValue(true)));
     }
   }
 
@@ -62,9 +59,7 @@ export default function ImageViewer(props) {
       email: localStorage.getItem("email"),
       date: new Date(),
     };
-    axios
-      .post(`${config.backendUrl}comment`, data)
-      .then(()=>toggleValue())
+    axios.post(`${config.backendUrl}comment`, data).then(() => toggleValue());
   }
 
   function toggleValue() {
@@ -307,4 +302,19 @@ export default function ImageViewer(props) {
   );
 }
 
+const mapStatetoProps = (state) => {
+  console.log(state);
+  const { updater } = state;
+  console.log(updater);
+  return {
+    updater: updater,
+  };
+};
 
+// const mapDispatchtoProps = (dispatch) => {
+//   return {
+//     updateValue: () => dispatch(action.type === "updateValue"),
+//   };
+// };
+
+export default connect(mapStatetoProps)(ImageViewer);

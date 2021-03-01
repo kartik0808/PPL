@@ -1,4 +1,10 @@
-export default action = {
-  type: 'updateValue',
-  payload:true
-}
+const action = {
+  updateValue: (data) => {
+    return {
+      type: "updateValue",
+      payload: data,
+    };
+  },
+};
+
+export default action;

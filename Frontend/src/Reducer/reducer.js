@@ -1,12 +1,15 @@
 const initialState = {
-  updater : true
-}
+  updater: true,
+};
 
-const reducer = (state = initialState,action) => {
-  switch(action.type){
-    case 'updateValue':
-      return {...state,updater : !action.payload}
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "updateValue":
+      return { ...state, updater: !action.payload};
+
+    default:
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;
