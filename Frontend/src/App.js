@@ -5,10 +5,6 @@ import Footer from './Components/Footer'
 import history from './History/history'
 
 function App(){
-    
-  // window.onbeforeunload = function () {
-  //   localStorage.clear();
-  // };
 
   if (
     (window.location.pathname === '/timeline') &&

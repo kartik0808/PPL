@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import config from "../../Config/config";
 import { Link } from "react-router-dom";
 import time from "../../TimeFunctions";
+import action from '../../Action/action';
 
 export default function ImageViewer(props) {
   const data = props.match.params.number;
@@ -28,6 +29,7 @@ export default function ImageViewer(props) {
           res.data.likedby.includes(localStorage.getItem("email"))
         );
         setAddComment(res.data.comments);
+        console.log('hello');
       })
   }, [updater,value]);
 
@@ -62,7 +64,6 @@ export default function ImageViewer(props) {
     };
     axios
       .post(`${config.backendUrl}comment`, data)
-      .then((res) => console.log(res.data))
       .then(()=>toggleValue())
   }
 
@@ -275,7 +276,6 @@ export default function ImageViewer(props) {
                 </li>
                 {addComment
                   .map((value, index) => {
-                    console.log(value);
                     return (
                       <li key={index}>
                         <div className="list_image">
