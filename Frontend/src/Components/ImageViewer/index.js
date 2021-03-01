@@ -39,7 +39,7 @@ function ImageViewer(props) {
 
   function handleLike(event) {
     event.email = localStorage.getItem("email");
-    if (updater == true) {
+    if (props.updater == true) {
       axios
         .post(`${config.backendUrl}likes`, event)
         .then((res) => console.log(res.data))

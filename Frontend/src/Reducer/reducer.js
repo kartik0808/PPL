@@ -5,7 +5,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "updateValue":
-      return { ...state, updater: !action.payload};
+      return { ...state, updater: action.payload};
 
     default:
       return state;
