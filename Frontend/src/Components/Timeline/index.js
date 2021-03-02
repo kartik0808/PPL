@@ -5,7 +5,7 @@ import axios from "axios";
 import TimelineRoutes from "../../Routes/TimelineRoutes";
 
 
-function Timeline(props) {
+function Timeline() {
   const [uploadImage, setUploadImage] = useState(false);
   const [userName, setUserName] = useState("");
   const [value, setValue] = useState(false);

@@ -1,10 +1,8 @@
 import React from "react";
-import {Link} from 'react-router-dom';
 import axios from "axios";
-import Routes from '../../Routes/Routes'
 import config from "../../Config/config";
-import history from '../../History/history'
-import './header.css'
+import history from "../../History/history";
+import "./header.css";
 
 function Header() {
   const [user, setUser] = React.useState("");
@@ -16,9 +14,9 @@ function Header() {
   //   });
   // }, []);
 
-  function handleLogout(){
+  function handleLogout() {
     localStorage.clear();
-    history.push('/login');
+    history.push("/login");
   }
 
   return (
@@ -36,9 +34,7 @@ function Header() {
               <span className="icon-bar" /> <span className="icon-bar" />{" "}
               <span className="icon-bar" />{" "}
             </button>
-            <a className="brand" >
-              PPL
-            </a>
+            <a className="brand">PPL</a>
             <div className="pro_info pull-right">
               <div className="pro_icn">
                 <img src="/./images/pic_small.png" />
@@ -79,23 +75,23 @@ function Header() {
               <ul className="nav">
                 <li className="active">
                   {" "}
-                  <a >Home</a>{" "}
+                  <a>Home</a>{" "}
                 </li>
-                <li >
+                <li>
                   {" "}
-                  <a >E-Coupons</a>{" "}
+                  <a>E-Coupons</a>{" "}
                 </li>
-                <li >
+                <li>
                   {" "}
-                  <a >E-Brands</a>{" "}
+                  <a>E-Brands</a>{" "}
                 </li>
-                <li >
+                <li>
                   {" "}
-                  <a >Resuse Market</a>{" "}
+                  <a>Resuse Market</a>{" "}
                 </li>
-                <li >
+                <li>
                   {" "}
-                  <a >Lost and Found</a>{" "}
+                  <a>Lost and Found</a>{" "}
                 </li>
               </ul>
             </div>
@@ -149,7 +145,9 @@ function Header() {
                 <div className="dropdown">
                   <img src="/./images/pic.png" />{" "}
                   <div className="dropdown-content">
-                    <a href="#" onClick={handleLogout}>Logout</a>
+                    <a href="#" onClick={handleLogout}>
+                      Logout
+                    </a>
                   </div>
                 </div>
               </div>{" "}

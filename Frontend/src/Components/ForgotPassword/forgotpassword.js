@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import config from "../../Config/config";
 import axios from "axios";
 import Modal from "react-modal";
-import history from '../../History/history'
+import history from "../../History/history";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [checkEmail, setCheckEmail] = useState(false);
-  const [verificationCode,setVerificationCode] = useState(0);
+  const [verificationCode, setVerificationCode] = useState(0);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [receivedVerificationCode,setReceivedVerificationCode] = useState('');
+  const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -46,7 +46,8 @@ export default function ForgotPassword() {
             <input
               type="text"
               onChange={(event) => setVerificationCode(event.target.value)}
-            /><br/>
+            />
+            <br />
             <input
               type="submit"
               defaultValue="Ok"
@@ -77,7 +78,7 @@ export default function ForgotPassword() {
               <span>Enter E-mail ID</span>
               <input
                 type="email"
-                placeholder="User@gmail.com"
+                placeholder="user@gmail.com"
                 onChange={(event) => setEmail(event.target.value)}
               />
             </li>

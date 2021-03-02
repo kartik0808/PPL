@@ -10,16 +10,15 @@ import { connect,useSelector } from 'react-redux'
 function TimelineLeft(){
   const [dataOnUser, setDataOnUser] = useState([]);
   const [userName, setUserName] = useState("");
-  const [value, setValue] = useState(false);
   const uploadImage = useSelector(state => state.uploadImage)
 
   useEffect(() => {
-    // const id = localStorage.getItem("email");
+
     axios.post(`${config.backendUrl}getpost`).then((res) => {
       setDataOnUser(res.data);
       console.log(uploadImage)
     })
-  }, [value,uploadImage]);
+  }, [uploadImage]);
 
   // useEffect(() => {
   //   const id = localStorage.getItem("email");
