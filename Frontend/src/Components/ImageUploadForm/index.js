@@ -2,14 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import './upload.css'
 import config from '../../Config/config'
+import { connect } from "react-redux";
+import action from "../../Action/action";
 
-export default function UploadImage(props){
+function UploadImage(props){
   
   const [imageName,setImageName] = React.useState('');
   const [description,setDescription] = React.useState('');
   const [category,setCategory] = React.useState('');
   const [imageStatus,setImageStatus] = React.useState('');
   const [uploadedFile,setUploadedFile] = React.useState('')
+  const [uploadImage, setUploadImage] = React.useState(false);
 
   function handleSubmit(event){
 
@@ -30,6 +33,8 @@ export default function UploadImage(props){
         setImageStatus(res.data);
         props.toggleValue();
       })
+      .then(setUploadImage(!uploadImage))
+      .then(props.dispatch(action.uploadImage(uploadImage)));
 
       var form = document.getElementById('uploadImage');
       form.reset();
@@ -75,3 +80,12 @@ export default function UploadImage(props){
     </div>
   );  
 }
+
+const mapStatetoProps = (state) => {
+  const { uploadImage } = state;
+  return {
+    uploadImage: uploadImage,
+  };
+};
+
+export default connect(mapStatetoProps)(UploadImage);

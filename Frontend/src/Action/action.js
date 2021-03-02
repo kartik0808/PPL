@@ -5,6 +5,12 @@ const action = {
       payload: data,
     };
   },
+  uploadImage: (data) => {
+    return {
+      type: "uploadImage",
+      payload: data,
+    };
+  },
 };
 
 export default action;
