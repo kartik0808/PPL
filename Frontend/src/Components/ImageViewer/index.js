@@ -26,9 +26,8 @@ function ImageViewer(props) {
       setImageInfo(res.data);
       setMessage(res.data.likedby.includes(localStorage.getItem("email")));
       setAddComment(res.data.comments);
-      console.log("hello");
     });
-  }, [props.updater, value]);
+  }, [updater, value]);
 
   useEffect(() => {
     const id = localStorage.getItem("email");
@@ -39,7 +38,7 @@ function ImageViewer(props) {
 
   function handleLike(event) {
     event.email = localStorage.getItem("email");
-    if (props.updater == true) {
+    if (updater === true) {
       axios
         .post(`${config.backendUrl}likes`, event)
         .then((res) => console.log(res.data))

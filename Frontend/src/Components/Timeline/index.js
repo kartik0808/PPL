@@ -33,10 +33,10 @@ function Timeline(props) {
               <div className="rght_btn">
                 {" "}
                 <span className="rght_btn_icon">
-                  <img src="images/btn_iconb.png" alt="up" />
+                  <img src="/images/btn_iconb.png" alt="up" />
                 </span>{" "}
                 <span className="btn_sep">
-                  <img src="images/btn_sep.png" alt="sep" />
+                  <img src="/images/btn_sep.png" alt="sep" />
                 </span>{" "}
                 <Link
                   onClick={() => {
@@ -53,10 +53,10 @@ function Timeline(props) {
               <div className="rght_btn">
                 {" "}
                 <span className="rght_btn_icon">
-                  <img src="images/btn_icona.png" alt="up" />
+                  <img src="/images/btn_icona.png" alt="up" />
                 </span>{" "}
                 <span className="btn_sep">
-                  <img src="images/btn_sep.png" alt="sep" />
+                  <img src="/images/btn_sep.png" alt="sep" />
                 </span>{" "}
                 <Link to="#">Invite Friends</Link>{" "}
               </div>
@@ -69,7 +69,7 @@ function Timeline(props) {
                     <li>
                       <a href="#">
                         <span className="list_icon">
-                          <img src="images/icon_01.png" alt="up" />
+                          <img src="/images/icon_01.png" alt="up" />
                         </span>{" "}
                         CATS
                       </a>
@@ -77,7 +77,7 @@ function Timeline(props) {
                     <li>
                       <a href="#">
                         <span className="list_icon">
-                          <img src="images/icon_02.png" alt="up" />
+                          <img src="/images/icon_02.png" alt="up" />
                         </span>{" "}
                         Dogs
                       </a>
@@ -85,7 +85,7 @@ function Timeline(props) {
                     <li>
                       <a href="#">
                         <span className="list_icon">
-                          <img src="images/icon_03.png" alt="up" />
+                          <img src="/images/icon_03.png" alt="up" />
                         </span>{" "}
                         Birds
                       </a>
@@ -93,7 +93,7 @@ function Timeline(props) {
                     <li>
                       <a href="#">
                         <span className="list_icon">
-                          <img src="images/icon_04.png" alt="up" />
+                          <img src="/images/icon_04.png" alt="up" />
                         </span>{" "}
                         Rabbit
                       </a>
@@ -101,7 +101,7 @@ function Timeline(props) {
                     <li>
                       <a href="#">
                         <span className="list_icon">
-                          <img src="images/icon_05.png" alt="up" />
+                          <img src="/images/icon_05.png" alt="up" />
                         </span>{" "}
                         Others
                       </a>
@@ -116,13 +116,13 @@ function Timeline(props) {
                 <div className="sub_dwn">
                   <div className="feat_sec">
                     <div className="feat_sec_img">
-                      <img src="images/feat_img1.png" alt="image" />
+                      <img src="/images/feat_img1.png" alt="image" />
                     </div>
                     <div className="feat_txt">Lorem Ipusum Text</div>
                   </div>
                   <div className="feat_sec">
                     <div className="feat_sec_img">
-                      <img src="images/feat_img2.png" alt="image" />
+                      <img src="/images/feat_img2.png" alt="image" />
                     </div>
                     <div className="feat_txt">Lorem Ipusum Text</div>
                     <div className="btm_rgt">
@@ -131,7 +131,7 @@ function Timeline(props) {
                   </div>
                   <div className="feat_sec">
                     <div className="feat_sec_img">
-                      <img src="images/feat_img3.png" alt="image" />
+                      <img src="/images/feat_img3.png" alt="image" />
                     </div>
                     <div className="feat_txt">Lorem Ipusum Text</div>
                     <div className="btm_rgt">
