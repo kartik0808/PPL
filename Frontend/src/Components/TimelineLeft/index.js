@@ -185,11 +185,4 @@ function TimelineLeft(){
   );
 }
 
-// const mapStatetoProps = (state) => {
-//   const { uploadImage } = state;
-//   return {
-//     uploadImage: uploadImage,
-//   };
-// };
-
 export default (TimelineLeft); 

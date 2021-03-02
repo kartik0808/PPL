@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./upload.css";
 import config from "../../Config/config";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import action from "../../Action/action";
 
 function UploadImage(props) {
