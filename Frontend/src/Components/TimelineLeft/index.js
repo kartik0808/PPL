@@ -4,24 +4,22 @@ import UploadImage from "../ImageUploadForm";
 import axios from "axios";
 import time from "../../TimeFunctions";
 import config from "../../Config/config";
-import { connect } from 'react-redux'
+import { connect,useSelector } from 'react-redux'
 
 
-function TimelineLeft(props){
-
-  const [uploadImage, setUploadImage] = useState(false);
+function TimelineLeft(){
   const [dataOnUser, setDataOnUser] = useState([]);
   const [userName, setUserName] = useState("");
   const [value, setValue] = useState(false);
+  const uploadImage = useSelector(state => state.uploadImage)
 
   useEffect(() => {
     // const id = localStorage.getItem("email");
     axios.post(`${config.backendUrl}getpost`).then((res) => {
       setDataOnUser(res.data);
-      console.log(res.data);
-      console.log(props.uploadImage)
+      console.log(uploadImage)
     })
-  }, [value,props.uploadImage]);
+  }, [value,uploadImage]);
 
   // useEffect(() => {
   //   const id = localStorage.getItem("email");
@@ -188,11 +186,11 @@ function TimelineLeft(props){
   );
 }
 
-const mapStatetoProps = (state) => {
-  const { uploadImage } = state;
-  return {
-    uploadImage: uploadImage,
-  };
-};
+// const mapStatetoProps = (state) => {
+//   const { uploadImage } = state;
+//   return {
+//     uploadImage: uploadImage,
+//   };
+// };
 
-export default connect(mapStatetoProps)(TimelineLeft); 
+export default (TimelineLeft); 

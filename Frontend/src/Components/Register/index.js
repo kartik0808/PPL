@@ -45,7 +45,7 @@ function Register(){
     }
   }
     return (
-      <div class="main">
+      <div className="main">
         <div className="content_rgt">
           <div className="register_sec">
             <h1>Create An Account</h1>

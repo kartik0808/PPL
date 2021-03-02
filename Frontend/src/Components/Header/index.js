@@ -36,7 +36,7 @@ function Header() {
               <span className="icon-bar" /> <span className="icon-bar" />{" "}
               <span className="icon-bar" />{" "}
             </button>
-            <a className="brand" href>
+            <a className="brand" >
               PPL
             </a>
             <div className="pro_info pull-right">
@@ -79,23 +79,23 @@ function Header() {
               <ul className="nav">
                 <li className="active">
                   {" "}
-                  <a href>Home</a>{" "}
+                  <a >Home</a>{" "}
                 </li>
-                <li className>
+                <li >
                   {" "}
-                  <a href>E-Coupons</a>{" "}
+                  <a >E-Coupons</a>{" "}
                 </li>
-                <li className>
+                <li >
                   {" "}
-                  <a href>E-Brands</a>{" "}
+                  <a >E-Brands</a>{" "}
                 </li>
-                <li className>
+                <li >
                   {" "}
-                  <a href>Resuse Market</a>{" "}
+                  <a >Resuse Market</a>{" "}
                 </li>
-                <li className>
+                <li >
                   {" "}
-                  <a href>Lost and Found</a>{" "}
+                  <a >Lost and Found</a>{" "}
                 </li>
               </ul>
             </div>
@@ -149,7 +149,7 @@ function Header() {
                 <div className="dropdown">
                   <img src="/./images/pic.png" />{" "}
                   <div className="dropdown-content">
-                    <Link onClick={handleLogout}>Logout</Link>
+                    <a href="#" onClick={handleLogout}>Logout</a>
                   </div>
                 </div>
               </div>{" "}

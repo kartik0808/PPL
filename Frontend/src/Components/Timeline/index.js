@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, Switch, Route, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import UploadImage from "../ImageUploadForm";
 import axios from "axios";
-import time from "../../TimeFunctions";
-import config from "../../Config/config";
-import TimelineLeft from "../TimelineLeft";
 import TimelineRoutes from "../../Routes/TimelineRoutes";
 
 
