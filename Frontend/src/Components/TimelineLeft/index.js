@@ -15,6 +15,7 @@ function TimelineLeft(){
   useEffect(() => {
 
     axios.post(`${config.backendUrl}getpost`).then((res) => {
+      //console.log(res.data);
       setDataOnUser(res.data);
       console.log(uploadImage)
     })
@@ -26,6 +27,7 @@ function TimelineLeft(){
   //     setUserName(res.data.fname + " " + res.data.lname);
   //   });
   // }, []);
+  
   return (
     <div>
       <div className="content_lft" id="content_lft">
@@ -115,7 +117,7 @@ function TimelineLeft(){
                       <div className="div_top">
                         <div className="div_top_lft">
                           <img src="images/img_6.png" />
-                          {image.email}
+                          {image.userInfo.username}
                         </div>
                         <div className="div_top_rgt">
                           <span className="span_date">

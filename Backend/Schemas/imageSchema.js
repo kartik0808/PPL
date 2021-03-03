@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 let imageData = new mongoose.Schema({
+  userInfo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ppluserinfo",
+  },
   email: String,
   imageName: String,
   description: String,

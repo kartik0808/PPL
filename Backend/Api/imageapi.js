@@ -1,18 +1,29 @@
 const imageInfo = require("../Schemas/imageSchema");
 
 module.exports = {
-
   // function to upload the information of the image to the database
   uploadImage: async function (data) {
-    imageInfo.create(data);
-    return "Image Uploaded";
+    try {
+      await imageInfo.create(data);
+      console.log(data.userInfo);
+      return "Image Uploaded";
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   // function to get all images
   fetchAllImages: async function (data) {
-    return imageInfo.find({}).then((res) => {
-      return res;
-    });
+    try {
+      return await imageInfo
+        .find({})
+        .populate("userInfo")
+        .then((res) => {
+          return res;
+        });
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   //function to find the required image

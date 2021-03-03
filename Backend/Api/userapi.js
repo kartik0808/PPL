@@ -33,7 +33,9 @@ module.exports ={
 
   // function to get the user information
   getUserName:async function(data){
-    return userInfo.findOne({'email':data}).then(res=>{return res;})
+    return await userInfo.findOne({'email':data}).then(res=>{
+      console.log(res);
+      return res;})
   },
 
   // function to change the password of the user

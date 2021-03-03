@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React,{useState,useCallback} from 'react';
 import axios from 'axios';
 import history from '../../History/history'
 import './login.css'
@@ -12,7 +12,7 @@ function Login(){
   const [password,setPassword] = useState('');
   const [loginError,setLoginError] = useState('');
   
-  function handleSubmit(event){
+  const handleSubmit = (event)=>{
     event.preventDefault();
     const user = {
       email:email,
@@ -41,7 +41,7 @@ function Login(){
 
     var form = document.getElementById('login-form');
     form.reset();
-  }
+  };
 
   return(
     <div>

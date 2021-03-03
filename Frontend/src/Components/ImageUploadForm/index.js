@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import "./upload.css";
 import config from "../../Config/config";
@@ -6,17 +6,33 @@ import { useDispatch } from "react-redux";
 import action from "../../Action/action";
 
 function UploadImage(props) {
+  const [userReference, setUserReference] = React.useState({});
   const [imageName, setImageName] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [imageStatus, setImageStatus] = React.useState("");
   const [uploadedFile, setUploadedFile] = React.useState("");
-  const [uploadImage, setUploadImage] = React.useState(false);
+  const [uploadImg, setUploadImg] = React.useState(true);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .post(`${config.backendUrl}userdata`, {
+        email: localStorage.getItem("email"),
+      })
+      .then((res) => {
+        setUserReference(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(userReference);
     const formData = new FormData();
+    formData.append("userInfo", userReference._id);
     formData.append("email", localStorage.getItem("email"));
     formData.append("imageName", imageName);
     formData.append("description", description);
@@ -32,8 +48,8 @@ function UploadImage(props) {
         setImageStatus(res.data);
         props.toggleValue();
       })
-      .then(setUploadImage(!uploadImage))
-      .then(dispatch(action.uploadImage(uploadImage)));
+      .then(setUploadImg(!uploadImg))
+      .then(dispatch(action.uploadImage(uploadImg)));
 
     var form = document.getElementById("uploadImage");
     form.reset();
@@ -43,7 +59,7 @@ function UploadImage(props) {
       <form
         onSubmit={handleSubmit}
         id="uploadImage"
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
         <label className="label1">Name:</label>
         <input
@@ -55,7 +71,7 @@ function UploadImage(props) {
         <label className="label1">Description(Max. 20 letters):</label>
         <textarea
           name="description"
-          maxlength="20"
+          maxLength="20"
           onChange={(event) => setDescription(event.target.value)}
         />
         <label className="label1">Categories:</label>
@@ -69,7 +85,7 @@ function UploadImage(props) {
               onChange={(event) => setCategory(event.target.value)}
               required
             />
-            <label for="dog">Dogs</label>
+            <label htmlFor="dog">Dogs</label>
           </div>
           <div className="animals">
             <input
@@ -79,7 +95,7 @@ function UploadImage(props) {
               value="cat"
               onChange={(event) => setCategory(event.target.value)}
             />
-            <label for="cat">Cats</label>
+            <label htmlFor="cat">Cats</label>
           </div>
           <div className="animals">
             <input
@@ -88,7 +104,7 @@ function UploadImage(props) {
               value="bird"
               onChange={(event) => setCategory(event.target.value)}
             />
-            <label for="bird">Birds</label>
+            <label htmlFor="bird">Birds</label>
           </div>
           <div className="animals">
             <input
@@ -97,7 +113,7 @@ function UploadImage(props) {
               value="rabbit"
               onChange={(event) => setCategory(event.target.value)}
             />
-            <label for="rabbit">Rabbit</label>
+            <label htmlFor="rabbit">Rabbit</label>
           </div>
           <div className="animals">
             <input
@@ -107,7 +123,7 @@ function UploadImage(props) {
               value="other"
               onChange={(event) => setCategory(event.target.value)}
             />
-            <label for="other">Other</label>
+            <label htmlFor="other">Other</label>
           </div>
         </div>
         <input
