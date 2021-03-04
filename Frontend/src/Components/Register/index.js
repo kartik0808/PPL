@@ -13,9 +13,9 @@ function Register(){
   const [lname,setLname] = useState('');
   const [signupCheck,setSignupCheck] = useState('');
   const [checkValue,setCheckValue] = useState('');
-
-  function redirector(){
-    localStorage.setItem('email',email);
+  
+  function redirector(token){
+    localStorage.setItem('token',token);
     history.push('/timeline');
   }
 
@@ -32,12 +32,12 @@ function Register(){
       axios
         .post(`${config.backendUrl}receivedata`,user)
         .then(res=>{
-          setSignupCheck(res.data);
+          setSignupCheck(res.data.newUserDataCheck);
           console.log(signupCheck);
-          if(res.data=== "Details entered"){
-            redirector();
-          } else{
-            history.push('/')
+          if (res.data.newUserDataCheck === "Details entered") {
+            redirector(res.data.accessToken);
+          } else {
+            history.push("/");
           }
       })
     } else {

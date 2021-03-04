@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { Link, Switch, Route, Router } from "react-router-dom";
 import UploadImage from "../ImageUploadForm";
+import history from "../../History/history"
 import axios from "axios";
+import action from "../../Action/action"
 import time from "../../TimeFunctions";
 import config from "../../Config/config";
-import { connect,useSelector } from 'react-redux'
+import { useSelector,useDispatch } from "react-redux";
 
-
-function TimelineLeft(){
+function TimelineLeft() {
   const [dataOnUser, setDataOnUser] = useState([]);
   const [userName, setUserName] = useState("");
-  const uploadImage = useSelector(state => state.uploadImage)
+  const uploadImage = useSelector((state) => state.uploadImage);
+  const userInfo = useSelector(state => state.storeUserInfo)
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
-    axios.post(`${config.backendUrl}getpost`).then((res) => {
-      //console.log(res.data);
-      setDataOnUser(res.data);
-      console.log(uploadImage)
-    })
+    axios
+      .get(`${config.backendUrl}getpost`)
+      .then((res) => {
+        setDataOnUser(res.data.getImages);
+        console.log(uploadImage);
+        dispatch(action.storeUserInfo(res.data.loggedIn))
+      })
+      .catch((err) =>
+        history.push({
+          pathname: "/login",
+          search: "?query=error"+err,
+          data: "Login Credentials do not match.Please Login again"+err,
+        })
+      );
   }, [uploadImage]);
 
   // useEffect(() => {
@@ -27,7 +38,7 @@ function TimelineLeft(){
   //     setUserName(res.data.fname + " " + res.data.lname);
   //   });
   // }, []);
-  
+
   return (
     <div>
       <div className="content_lft" id="content_lft">
@@ -62,11 +73,11 @@ function TimelineLeft(){
                   <ul>
                     <li>
                       <div className="div_name1">Name :</div>
-                      <div className="div_name2">Stefany Gibbs</div>
+                      <div className="div_name2">{userInfo.fname + " " + userInfo.lname}</div>
                     </li>
                     <li>
                       <div className="div_name1">Sex :</div>
-                      <div className="div_name2">Female</div>
+                      <div className="div_name2">Male</div>
                     </li>
                     <li>
                       <div className="div_name1">Description :</div>
@@ -187,4 +198,4 @@ function TimelineLeft(){
   );
 }
 
-export default (TimelineLeft); 
+export default TimelineLeft;

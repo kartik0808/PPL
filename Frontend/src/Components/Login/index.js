@@ -5,9 +5,12 @@ import history from '../../History/history'
 import './login.css'
 import {Link} from 'react-router-dom'
 import config from '../../Config/config'
+import { useDispatch } from "react-redux";
+import action from '../../Action/action'
 
-function Login(){
+function Login(props){
 
+  const errorMessage = props.location.data;
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [loginError,setLoginError] = useState('');
@@ -18,26 +21,22 @@ function Login(){
       email:email,
       password:password
     }
-
-    async function redirector(){
-      await localStorage.setItem('email',user.email);
+    async function redirector(token) {
+      await localStorage.setItem("token", token);
       history.push({
-        pathname:'/timeline',
-        data:user
+        pathname: "/timeline",
       });
     }
 
-    axios
-      .post(`${config.backendUrl}checkuser`,user)
-      .then(res=>{
-        console.log(res.data);
-        setLoginError(res.data);
-        if(res.data=== "Login Successful"){
-          redirector();
-        } else{
-          history.push('/login')
-        }
-      })
+    axios.post(`${config.backendUrl}checkuser`, user).then((res) => {
+      console.log(res.data);
+      setLoginError(res.data.checkUserExists);
+      if (res.data.checkUserExists === "Login Successful") {
+        redirector(res.data.accessToken);
+      } else {
+        history.push("/login");
+      }
+    });
 
     var form = document.getElementById('login-form');
     form.reset();
@@ -48,6 +47,7 @@ function Login(){
       <div className="content_rgt">
         <div className="login_sec">
           <h1>Log In</h1>
+          <p className="red">{errorMessage}</p>
           <form onSubmit={handleSubmit} id="login-form">
             <li><span>Email-ID</span><input type="email" name="email" placeholder="Enter your email" onChange={event => setEmail(event.target.value)}/></li>
             <li><span>Password</span><input type="password" name="password" placeholder="Enter your password" onChange={event => setPassword(event.target.value)}/></li>

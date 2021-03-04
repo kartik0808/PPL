@@ -20,7 +20,7 @@ module.exports ={
   checkUser:async function(data){
     const checkUserCredentials = await userInfo.findOne({"email":data.email,"password":data.password});
     if(checkUserCredentials){
-      return ("Login Successful");
+      return await userInfo.findOne({ email: data.email, password: data.password }).then(res=>{return res;})
     } else{
         const checkUserExists = await userInfo.findOne({"email":data.email});
         if(checkUserExists){

@@ -8,7 +8,7 @@ function App(){
 
   if (
     (window.location.pathname === '/timeline') &&
-    !localStorage.getItem("email")
+    !localStorage.getItem("token")
   ) {
     history.push("/");
   }

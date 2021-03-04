@@ -11,6 +11,12 @@ const action = {
       payload: data,
     };
   },
+  storeUserInfo:(data) => {
+    return {
+      type: "storeUserInfo",
+      payload: data
+    }
+  }
 };
 
 export default action;

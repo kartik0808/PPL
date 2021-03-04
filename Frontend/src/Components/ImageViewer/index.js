@@ -4,6 +4,7 @@ import config from "../../Config/config";
 import { Link } from "react-router-dom";
 import time from "../../TimeFunctions";
 import action from "../../Action/action";
+import history from "../../History/history"
 import { connect, useSelector, useDispatch } from "react-redux";
 
 function ImageViewer(props) {
@@ -12,37 +13,49 @@ function ImageViewer(props) {
     window.scrollTo(0, 0);
   }, []);
 
+  const token = "Bearer " + localStorage.getItem("token");
   const [imageInfo, setImageInfo] = useState("");
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
   const [comment, setComment] = useState("");
   const [addComment, setAddComment] = useState([]);
   const [value, setValue] = useState(false);
-  const updater = useSelector(state => state.updater);
-  const dispatch = useDispatch()
+  const updater = useSelector((state) => state.updater);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.post(`${config.backendUrl}imageinfo`, { _id: data }).then((res) => {
-      setImageInfo(res.data);
-      setMessage(res.data.likedby.includes(localStorage.getItem("email")));
-      setAddComment(res.data.comments);
-    });
+    axios
+      .post(
+        `${config.backendUrl}imageinfo`,
+        { _id: data },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      )
+      .then((res) => {
+        setImageInfo(res.data);
+        setMessage(res.data.likedby.includes(localStorage.getItem("email")));
+        setAddComment(res.data.comments);
+        setUserName(res.data.userInfo.username);
+      });
   }, [updater, value]);
-
-  useEffect(() => {
-    const id = localStorage.getItem("email");
-    axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
-      setUserName(res.data.fname + " " + res.data.lname);
-    });
-  }, []);
 
   function handleLike(event) {
     event.email = localStorage.getItem("email");
     if (updater === true) {
       axios
         .post(`${config.backendUrl}likes`, event)
-        .then((res) => console.log(res.data))
-        .then(dispatch(action.updateValue(false)));
+        .then((res) => console.log(res))
+        .then(dispatch(action.updateValue(false)))
+        .catch((err) =>
+          history.push({
+            pathname: "/login",
+            search: "?query=error"+err,
+            data: "Login Credentials do not match.Please Login again",
+          })
+        );
     } else {
       axios
         .post(`${config.backendUrl}dislikes`, event)
@@ -58,7 +71,13 @@ function ImageViewer(props) {
       email: localStorage.getItem("email"),
       date: new Date(),
     };
-    axios.post(`${config.backendUrl}comment`, data).then(() => toggleValue());
+    axios
+      .post(`${config.backendUrl}comment`, data, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then(() => toggleValue());
   }
 
   function toggleValue() {
@@ -195,4 +214,4 @@ function ImageViewer(props) {
   );
 }
 
-export default (ImageViewer);
+export default ImageViewer;

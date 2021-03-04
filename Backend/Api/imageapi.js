@@ -28,9 +28,12 @@ module.exports = {
 
   //function to find the required image
   getImageInfo: async function (data) {
-    return imageInfo.findOne({ _id: data }).then((res) => {
-      return res;
-    });
+    return imageInfo
+      .findOne({ _id: data })
+      .populate("userInfo")
+      .then((res) => {
+        return res;
+      });
   },
 
   // function to add likes to the image

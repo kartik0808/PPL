@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import UploadImage from "../ImageUploadForm";
 import axios from "axios";
+import {useSelector} from 'react-redux'
 import TimelineRoutes from "../../Routes/TimelineRoutes";
 
 
@@ -9,13 +10,8 @@ function Timeline() {
   const [uploadImage, setUploadImage] = useState(false);
   const [userName, setUserName] = useState("");
   const [value, setValue] = useState(false);
-
-  // useEffect(() => {
-  //   const id = localStorage.getItem("email");
-  //   axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
-  //     setUserName(res.data.fname + " " + res.data.lname);
-  //   });
-  // }, []);
+  const userInfo = useSelector((state) => state.storeUserInfo);
+  console.log("user info",userInfo);
 
   function toggleValue() {
     if (value === false) {

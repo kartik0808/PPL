@@ -1,11 +1,16 @@
 import React from "react";
 import axios from "axios";
+import lodash from "lodash"
 import config from "../../Config/config";
+import action from "../../Action/action"
 import history from "../../History/history";
+import { useSelector,useDispatch } from "react-redux";
 import "./header.css";
 
 function Header() {
   const [user, setUser] = React.useState("");
+  const userInfo = useSelector((state) => state.storeUserInfo);
+  const dispatch = useDispatch();
 
   // React.useEffect(() => {
   //   const id = localStorage.getItem("email");
@@ -16,6 +21,7 @@ function Header() {
 
   function handleLogout() {
     localStorage.clear();
+    dispatch(action.storeUserInfo({}))
     history.push("/login");
   }
 
@@ -152,7 +158,11 @@ function Header() {
                 </div>
               </div>{" "}
             </div>
-            <div className="info_div1">Me</div>
+            { !(lodash.isEmpty(userInfo)) ? (
+              <div className="info_div1">{userInfo.username}</div>
+            ) : (
+              <div className="info_div1">Me</div>
+            )}
           </div>
         </div>
       </div>

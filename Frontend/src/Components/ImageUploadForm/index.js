@@ -17,9 +17,7 @@ function UploadImage(props) {
 
   useEffect(() => {
     axios
-      .post(`${config.backendUrl}userdata`, {
-        email: localStorage.getItem("email"),
-      })
+      .get(`${config.backendUrl}userdata`)
       .then((res) => {
         setUserReference(res.data);
       })
