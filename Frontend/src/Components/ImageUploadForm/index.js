@@ -17,8 +17,9 @@ function UploadImage(props) {
 
   useEffect(() => {
     axios
-      .get(`${config.backendUrl}userdata`)
+      .get(`${config.backendUrl}userdatafromdb`)
       .then((res) => {
+        console.log(res.data);
         setUserReference(res.data);
       })
       .catch((err) => {
@@ -28,7 +29,6 @@ function UploadImage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(userReference);
     const formData = new FormData();
     formData.append("userInfo", userReference._id);
     formData.append("email", localStorage.getItem("email"));

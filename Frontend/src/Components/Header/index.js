@@ -8,16 +8,8 @@ import { useSelector,useDispatch } from "react-redux";
 import "./header.css";
 
 function Header() {
-  const [user, setUser] = React.useState("");
   const userInfo = useSelector((state) => state.storeUserInfo);
   const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //   const id = localStorage.getItem("email");
-  //   axios.post(`${config.backendUrl}userdata`, { email: id }).then((res) => {
-  //     setUser(res.data.username);
-  //   });
-  // }, []);
 
   function handleLogout() {
     localStorage.clear();
@@ -45,10 +37,12 @@ function Header() {
               <div className="pro_icn">
                 <img src="/./images/pic_small.png" />
               </div>
-              <div className="pro_txt">
-                Me
+                {!lodash.isEmpty(userInfo) ? (
+                  <div className="pro_txt">{userInfo.username}</div>
+                ) : (
+                  <div className="pro_txt">Me</div>
+                )}
                 <b className="caret" />
-              </div>
               <ul
                 className="dropdown-menu"
                 role="menu"
@@ -158,7 +152,7 @@ function Header() {
                 </div>
               </div>{" "}
             </div>
-            { !(lodash.isEmpty(userInfo)) ? (
+            {!lodash.isEmpty(userInfo) ? (
               <div className="info_div1">{userInfo.username}</div>
             ) : (
               <div className="info_div1">Me</div>

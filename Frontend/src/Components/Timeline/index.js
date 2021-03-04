@@ -8,10 +8,7 @@ import TimelineRoutes from "../../Routes/TimelineRoutes";
 
 function Timeline() {
   const [uploadImage, setUploadImage] = useState(false);
-  const [userName, setUserName] = useState("");
   const [value, setValue] = useState(false);
-  const userInfo = useSelector((state) => state.storeUserInfo);
-  console.log("user info",userInfo);
 
   function toggleValue() {
     if (value === false) {
@@ -37,7 +34,6 @@ function Timeline() {
                 <Link
                   onClick={() => {
                     setUploadImage(!uploadImage);
-                    
                   }}
                 >
                   Upload Post

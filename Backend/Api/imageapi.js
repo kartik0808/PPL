@@ -15,8 +15,12 @@ module.exports = {
   // function to get all images
   fetchAllImages: async function (data) {
     try {
+      console.log("limitand skip",data)
       return await imageInfo
         .find({})
+        .sort({_id:-1})
+        .limit(parseInt(data.limit))
+        .skip(parseInt(data.skip))
         .populate("userInfo")
         .then((res) => {
           return res;

@@ -23,23 +23,24 @@ router.get("/", (req, res) => {
 // adding data to the database
 router.post("/receivedata", async function (req, res) {
   const newUserDataCheck = await userapi.addUser(req.body);
-  if(newUserDataCheck === "Details entered") {
+  if (newUserDataCheck === "Details entered") {
     const user = {
-      email:req.body.email,
-      username:req.body.username,
-      fname:req.body.fname,
-      lname:req.body.lname
-    }
+      email: req.body.email,
+      username: req.body.username,
+      fname: req.body.fname,
+      lname: req.body.lname,
+    };
     const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken: accessToken, newUserDataCheck: newUserDataCheck});
+    res.json({ accessToken: accessToken, newUserDataCheck: newUserDataCheck });
+  } else {
+    res.json({ newUserDataCheck: newUserDataCheck });
   }
-  res.json({newUserDataCheck:newUserDataCheck});
 });
 
 // checking and  logging in user
 router.post("/checkuser", async function (req, res) {
   const checkUserExists = await userapi.checkUser(req.body);
-  console.log(checkUserExists)
+  console.log(checkUserExists);
   if (checkUserExists.email === req.body.email) {
     const user = {
       username: checkUserExists.username,
@@ -67,16 +68,21 @@ router.post(
 
 // getting all the images
 router.get("/getpost", authenticateToken, async function (req, res) {
-  const getImages = await imageapi.fetchAllImages();
-  console.log(req.user);
-  res.json({getImages:getImages,loggedIn:req.user});
+  const getImages = await imageapi.fetchAllImages(req.query);
+  console.log(req.query);
+  res.json({ getImages: getImages, loggedIn: req.user });
 });
 
 // get information of the logged in user
-router.get("/userdata", authenticateToken,async function (req, res) {
-  const userData = await userapi.getUserName(req.user.email);
-  res.json(userData);
+router.get("/userdata", authenticateToken, async function (req, res) {
+  res.json({ userData: req.user });
 });
+
+//get information from db
+router.get("/userdatafromdb",authenticateToken,async function(req,res){
+  const userId = await userapi.getUserName(req.user.email)
+  res.json(userId);
+})
 
 // getting the information of the image
 router.post("/imageinfo", async function (req, res) {

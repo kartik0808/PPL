@@ -14,7 +14,6 @@ axios.defaults.headers.authorization = localStorage.getItem("token");
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   config.headers.authorization = token;
-  console.log(config);
   return config;
 });
 
