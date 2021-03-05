@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, Switch, Route, Router } from "react-router-dom";
-import UploadImage from "../ImageUploadForm";
 import history from "../../History/history";
 import axios from "axios";
 import action from "../../Action/action";
@@ -11,46 +10,64 @@ import "./index.css";
 
 function TimelineLeft() {
   const [dataOnUser, setDataOnUser] = useState([]);
-  const [userName, setUserName] = useState("");
   const uploadImage = useSelector((state) => state.uploadImage);
   const userInfo = useSelector((state) => state.storeUserInfo);
   const dispatch = useDispatch();
+  const [images, setImages] = useState(true);
   const [skip, setSkip] = useState(0);
   const limit = 5;
 
+  function scroller() {
+    try {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+        images
+      ) {
+        document.getElementById("loading").style.display = "block";
+        // disableScroll.on();
+        setTimeout(() => {
+          setSkip(skip + 5);
+        }, 1000);
+      } else {
+        document.getElementById("loading").style.display = "none";
+        console.log("not now");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
+    window.addEventListener("scroll", scroller);
+    console.log("skip",skip);
     axios
       .get(`${config.backendUrl}getpost?skip=${skip}&limit=${limit}`)
       .then((res) => {
-        setDataOnUser(res.data.getImages);
-        if (res.data.getImages.length < 5) {
-          document.getElementById("next-0").style.display = "none";
-          document.getElementById("next-1").style.display = "none";
-        } else {
-          document.getElementById("next-0").style.display = "block";
-          document.getElementById("next-1").style.display = "block";
+        const arr = res.data.getImages;
+        if (arr.length === 0) {
+          document.getElementById("loading").style.display = "none";
+          setImages(false);
         }
-        if (skip === 0) {
-          document.getElementById("prev-0").style.display = "none";
-          document.getElementById("prev-1").style.display = "none";
-        } else {
-          document.getElementById("prev-0").style.display = "block";
-          document.getElementById("prev-1").style.display = "block";
-        }
+        setDataOnUser([...dataOnUser, ...arr]);
         console.log(uploadImage);
         dispatch(action.storeUserInfo(res.data.loggedIn));
+        // disableScroll.off();
       })
       .catch((err) =>
         history.push({
           pathname: "/login",
-          search: "?query=error" + err,
-          data: "Login Credentials do not match.Please Login again" + err,
+          search: "?query=" + err,
+          data: "Login Credentials do not match.Please Login again",
         })
       );
+    return () => {
+      window.removeEventListener("scroll", scroller);
+    };
   }, [uploadImage, skip]);
 
   return (
-    <div>
+    <div id="timeline-lft">
+      {}
       <div className="content_lft" id="content_lft">
         <div className="contnt_1">
           <div className="list_1">
@@ -128,26 +145,8 @@ function TimelineLeft() {
             </div>
           </div>
         </div>
-        <div id="page-handle">
-          <button
-            id="prev-0"
-            onClick={() => {
-              setSkip(skip - 5);
-            }}
-          >
-            Previous Page
-          </button>
-          <span>{skip / limit}</span>
-          <button
-            id="next-0"
-            onClick={() => {
-              setSkip(skip + 5);
-            }}
-          >
-            Next Page
-          </button>
-        </div>
         {dataOnUser.map((image, index) => {
+          console.log("image details", image);
           return (
             <div key={index}>
               <div>
@@ -224,26 +223,8 @@ function TimelineLeft() {
             </div>
           );
         })}
-        <div id="page-handle">
-          <button
-            id="prev-1"
-            onClick={() => {
-              setSkip(skip - 5);
-              window.scrollTo(0, 200);
-            }}
-          >
-            Previous Page
-          </button>
-          <span>{skip / limit}</span>
-          <button
-            id="next-1"
-            onClick={() => {
-              setSkip(skip + 5);
-              window.scrollTo(0, 200);
-            }}
-          >
-            Next Page
-          </button>
+        <div id="loading">
+          <img src="images/loading.gif" />
         </div>
       </div>
     </div>

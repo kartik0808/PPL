@@ -10,12 +10,6 @@ import {useDispatch} from "react-redux"
 function App() {
 
   const dispatch = useDispatch()
-  if (
-    window.location.pathname === "/timeline" &&
-    !localStorage.getItem("token")
-  ) {
-    history.push("/");
-  }
 
   if (localStorage.getItem("token")) {
     async function getData() {

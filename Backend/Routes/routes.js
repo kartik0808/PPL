@@ -69,7 +69,7 @@ router.post(
 // getting all the images
 router.get("/getpost", authenticateToken, async function (req, res) {
   const getImages = await imageapi.fetchAllImages(req.query);
-  console.log(req.query);
+  console.log(getImages);
   res.json({ getImages: getImages, loggedIn: req.user });
 });
 

@@ -14,3 +14,13 @@
 #page-handle button{
   margin:0 10px;
 }
+
+#loading{
+  margin:auto;
+  padding-bottom:10px;
+  display:none;
+  font-weight:bolder;
+  height:50px;
+  width:50px;
+  background-color: black;
+}

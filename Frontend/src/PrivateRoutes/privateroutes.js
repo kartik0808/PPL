@@ -6,14 +6,13 @@ import history from '../History/history'
 
 const PrivateRoutes = ({ component: Component, ...rest }) => {  
   var session_token=localStorage.getItem('token')
-  console.log('Hello');
 
   return (
     <Route {...rest} render={props => (
      session_token !== null ? (
       < Component  {...props} />
       ) : (
-            history.push('/')
+            history.push('/login')
           )
       )} 
     />

@@ -27,7 +27,6 @@ function Login(props) {
         method: "POST",
         data: user,
       });
-      console.log("This is res", res);
       setLoginError(res.data.checkUserExists);
       if (res.data.checkUserExists === "Login Successful") {
         localStorage.setItem("token", res.data.accessToken);
