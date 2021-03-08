@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, Switch, Route, Router } from "react-router-dom";
 import history from "../../History/history";
 import axios from "axios";
-import action from "../../Action/action";
+import {storeUserInfo} from "../../Action/action";
 import time from "../../TimeFunctions";
 import config from "../../Config/config";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,7 +10,7 @@ import "./index.css";
 
 function TimelineLeft() {
   const [dataOnUser, setDataOnUser] = useState([]);
-  const uploadImage = useSelector((state) => state.uploadImage);
+  const [uploadImage,setUploadImage] = useState(useSelector((state) => state.uploadImage));
   const userInfo = useSelector((state) => state.storeUserInfo);
   const dispatch = useDispatch();
   const [images, setImages] = useState(true);
@@ -30,7 +30,6 @@ function TimelineLeft() {
         }, 1000);
       } else {
         document.getElementById("loading").style.display = "none";
-        console.log("not now");
       }
     } catch (err) {
       console.log(err);
@@ -50,7 +49,7 @@ function TimelineLeft() {
         }
         setDataOnUser([...dataOnUser, ...arr]);
         console.log(uploadImage);
-        dispatch(action.storeUserInfo(res.data.loggedIn));
+        dispatch(storeUserInfo(res.data.loggedIn));
         // disableScroll.off();
       })
       .catch((err) =>
@@ -85,10 +84,10 @@ function TimelineLeft() {
           <div className="timeline_div">
             <div className="timeline_div1">
               <div className="profile_pic">
-                <img src="images/timeline_img1.png" />
-                <div className="profile_text">
+                <img src="/images/trythis.jpeg" />
+                {/* <div className="profile_text">
                   <a href="#">Change Profile Pic</a>
-                </div>
+                </div> */}
               </div>
               <div className="profile_info">
                 <div className="edit_div">
@@ -146,7 +145,6 @@ function TimelineLeft() {
           </div>
         </div>
         {dataOnUser.map((image, index) => {
-          console.log("image details", image);
           return (
             <div key={index}>
               <div>

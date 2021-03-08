@@ -6883,8 +6883,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f58c20', end
 	background: linear-gradient(to bottom, #faf9f9 0%, #f1eff2 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf9f9', endColorstr='#f1eff2', GradientType=0 ); /* IE6-8 */}
 .timeline_div1{ float:left; padding:0px 18px 10px 18px; height:auto; width:95%;}
-.profile_pic{ float:left; padding:4px; border:1px solid #d4d4d4; box-shadow:1px 1px 1px #ededed; width:21%; height:auto; background-color:#fff;}
-.profile_pic img{ float:left; width:144px;}
+.profile_pic{ float:left; padding:4px; border:1px solid #d4d4d4; box-shadow:1px 1px 1px #ededed; width:21%; height:auto; background-color:#fff;border-radius:50%}
+.profile_pic img{ float:left; width:144px;height:144px;border-radius:50%}
 .profile_text{ float:left; position:relative; font-size:13px; text-align:center; background-color:rgba(255, 255, 255, 0.7); width:92%; line-height:31px;margin-top: -37px;
 margin-left: 5px;}
 .profile_text a{ color:#000;}

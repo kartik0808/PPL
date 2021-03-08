@@ -3,7 +3,7 @@ import axios from "axios";
 import "./upload.css";
 import config from "../../Config/config";
 import { useDispatch } from "react-redux";
-import action from "../../Action/action";
+import {uploadImage} from "../../Action/action";
 
 function UploadImage(props) {
   const [userReference, setUserReference] = React.useState({});
@@ -47,7 +47,7 @@ function UploadImage(props) {
         props.toggleValue();
       })
       .then(setUploadImg(!uploadImg))
-      .then(dispatch(action.uploadImage(uploadImg)));
+      .then(dispatch(uploadImage(uploadImg)));
 
     var form = document.getElementById("uploadImage");
     form.reset();

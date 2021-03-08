@@ -1,8 +1,6 @@
 import React from "react";
-import axios from "axios";
-import lodash from "lodash"
-import config from "../../Config/config";
-import action from "../../Action/action"
+import lodash from "lodash";
+import {storeUserInfo} from "../../Action/action"
 import history from "../../History/history";
 import { useSelector,useDispatch } from "react-redux";
 import "./header.css";
@@ -13,7 +11,7 @@ function Header() {
 
   function handleLogout() {
     localStorage.clear();
-    dispatch(action.storeUserInfo({}))
+    dispatch(storeUserInfo({}))
     history.push("/login");
   }
 

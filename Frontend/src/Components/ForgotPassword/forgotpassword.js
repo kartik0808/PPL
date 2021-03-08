@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import config from "../../Config/config";
-import axios from "axios";
 import Modal from "react-modal";
 import history from "../../History/history";
+import apiCaller from "../../utils/apicaller";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -12,17 +11,20 @@ export default function ForgotPassword() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [receivedVerificationCode, setReceivedVerificationCode] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    axios.post(`${config.backendUrl}forgot`, { email: email }).then((res) => {
-      console.log(res);
-      if (res.data === "email doesnot exist") {
-        setCheckEmail(true);
-      } else {
-        setReceivedVerificationCode(res.data);
-        setOpenModal(true);
-      }
+
+    const res = await apiCaller({
+      url: "forgot",
+      method: "POST",
+      data: {email:email},
     });
+    if (res.data === "email doesnot exist") {
+      setCheckEmail(true);
+    } else {
+      setReceivedVerificationCode(res.data);
+      setOpenModal(true);
+    }
   }
 
   return (

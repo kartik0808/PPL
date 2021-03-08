@@ -4,7 +4,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import history from "./History/history";
 import apiCaller from "./utils/apicaller";
-import action from "./Action/action"
+import {storeUserInfo} from "./Action/action"
 import {useDispatch} from "react-redux"
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
         url: "userdata",
         method: "GET",
       });
-      dispatch(action.storeUserInfo(res.data.userData))
+      dispatch(storeUserInfo(res.data.userData))
     }
     getData();
   }

@@ -5,10 +5,11 @@ import App from './App';
 import axios from 'axios'
 import {BrowserRouter} from 'react-router-dom';
 import  {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
 import reducer from './Reducer/reducer'
+import thunk from 'redux-thunk'
 
-const store = createStore(reducer);
+const store = createStore(reducer,applyMiddleware(thunk));
 
 axios.defaults.headers.authorization = localStorage.getItem("token");
 axios.interceptors.request.use((config) => {

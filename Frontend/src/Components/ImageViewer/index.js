@@ -1,11 +1,10 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import config from "../../Config/config";
 import { Link } from "react-router-dom";
 import time from "../../TimeFunctions";
-import action from "../../Action/action";
-import history from "../../History/history"
-import { connect, useSelector, useDispatch } from "react-redux";
+import {updateValue} from "../../Action/action";
+import apiCaller from "../../utils/apicaller";
+import history from "../../History/history";
+import { useSelector, useDispatch } from "react-redux";
 
 function ImageViewer(props) {
   const data = props.match.params.number;
@@ -13,7 +12,6 @@ function ImageViewer(props) {
     window.scrollTo(0, 0);
   }, []);
 
-  const token = "Bearer " + localStorage.getItem("token");
   const [imageInfo, setImageInfo] = useState("");
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
@@ -23,61 +21,74 @@ function ImageViewer(props) {
   const updater = useSelector((state) => state.updater);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    axios
-      .post(
-        `${config.backendUrl}imageinfo`,
-        { _id: data },
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      )
-      .then((res) => {
-        setImageInfo(res.data);
-        setMessage(res.data.likedby.includes(localStorage.getItem("email")));
-        setAddComment(res.data.comments);
-        setUserName(res.data.userInfo.username);
+  useEffect(async () => {
+    try {
+      const res = await apiCaller({
+        url: "imageinfo",
+        method: "POST",
+        data: { _id: data },
       });
+      setImageInfo(res.data);
+      setMessage(res.data.likedby.includes(localStorage.getItem("email")));
+      setAddComment(res.data.comments);
+      setUserName(res.data.userInfo.username);
+    } catch (err) {
+      error(err);
+    }
   }, [updater, value]);
 
-  function handleLike(event) {
+  function error(err) {
+    history.push({
+      pathname: "/login",
+      search: "?query=error" + err,
+      data: "Login Credentials do not match.Please Login again",
+    });
+  }
+
+  async function handleLike(event) {
     event.email = localStorage.getItem("email");
     if (updater === true) {
-      axios
-        .post(`${config.backendUrl}likes`, event)
-        .then((res) => console.log(res))
-        .then(dispatch(action.updateValue(false)))
-        .catch((err) =>
-          history.push({
-            pathname: "/login",
-            search: "?query=error"+err,
-            data: "Login Credentials do not match.Please Login again",
-          })
-        );
+      try {
+        const res = await apiCaller({
+          url: "likes",
+          method: "POST",
+          data: event,
+        });
+        dispatch(updateValue(false));
+      } catch (err) {
+        error(err);
+      }
     } else {
-      axios
-        .post(`${config.backendUrl}dislikes`, event)
-        .then((res) => console.log(res.data))
-        .then(dispatch(action.updateValue(true)));
+      try {
+        const res = await apiCaller({
+          url: "dislikes",
+          method: "POST",
+          data: event,
+        });
+        dispatch(updateValue(true));
+      } catch (err) {
+        error(err);
+      }
     }
   }
 
-  function handleComment() {
+  async function handleComment() {
     const data = {
       _id: props.match.params.number,
       comment: comment,
       email: localStorage.getItem("email"),
       date: new Date(),
     };
-    axios
-      .post(`${config.backendUrl}comment`, data, {
-        headers: {
-          authorization: token,
-        },
-      })
-      .then(() => toggleValue());
+    try {
+      const res = await apiCaller({
+        url: "comment",
+        method: "POST",
+        data: data,
+      });
+      toggleValue();
+    } catch (err) {
+      error(err);
+    }
   }
 
   function toggleValue() {

@@ -1,22 +1,30 @@
-const action = {
-  updateValue: (data) => {
+
+  export const updateValue = (data) => {
     return {
       type: "updateValue",
       payload: data,
     };
-  },
-  uploadImage: (data) => {
+  }
+
+  export const uploadImage = (data) => {
     return {
       type: "uploadImage",
       payload: data,
     };
-  },
-  storeUserInfo:(data) => {
+  }
+
+  export const storeUserInfoAsync = (data) => {
     return {
       type: "storeUserInfo",
       payload: data
     }
   }
-};
 
-export default action;
+  export const storeUserInfo= data => {
+    return dispatch => {
+      setTimeout(() => {
+        dispatch(storeUserInfoAsync(data))
+      },5000)
+    }
+  }
+

@@ -28,5 +28,5 @@ app.listen(config.portNumber,()=>{
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/home',router);
+app.use('/',router);
 app.use(express.static('imgs'));
